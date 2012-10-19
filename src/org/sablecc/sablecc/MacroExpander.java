@@ -73,6 +73,11 @@ public class MacroExpander
   {
     List macro = (List) macros.get(macroName);
 
+    if( macro == null ) 
+    {
+    	throw new InternalSableCCError("Could not find macro "+macroName);
+    }
+    
     for(ListIterator li = macro.listIterator(); li.hasNext();)
     {
       if(li.nextIndex() != 0)
