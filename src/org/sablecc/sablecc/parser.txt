@@ -261,6 +261,25 @@ Macro:ParserNewBodyDecl
 
 $
 
+Macro:ParserAbstractLineNumberComputation
+
+        // the abstract node gets line number from the lowermost
+        // terminal or nonterminal on the stack. That should be
+        // the textually first, too.
+        int concreteLineNumber;
+        int concretePos;
+        if(nodeArrayList1.size() > 0) {
+            Node theFirstNode = (Node) (nodeArrayList1.get(0));
+            concreteLineNumber = theFirstNode.getLine();
+            concretePos = theFirstNode.getPos();
+        }	
+        else {
+            concreteLineNumber = 0;
+            concretePos = 0;
+        }
+        
+$
+
 Macro:ParserNewBodyDeclNull
         ArrayList<Object> nodeArrayList$0$ = null;
 
@@ -313,6 +332,14 @@ $
 Macro:ParserNewBodyNewTail
 );
 
+$
+ 
+Macro:ParserNewBodySetLineNumber
+
+        // tell the new node its line number
+        $0$Node$1$.setLine( concreteLineNumber );
+        $0$Node$1$.setPos( concretePos );
+        
 $
 
 Macro:ParserTypedLinkedListAdd
